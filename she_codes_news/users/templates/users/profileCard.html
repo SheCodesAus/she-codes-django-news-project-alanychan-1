@@ -1,0 +1,33 @@
+{% load static %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+{% endblock %}
+
+<!-- <h2 style="text-align:center">User Profile Card</h2> -->
+<h2>Profile Card</h2>
+<div id="profile-card">
+  {% if profile.photo_url %}
+    <img src="{{ profile.photo_url }}" alt="{{profile.username}}" style="height: 100px; width: 50%">
+  {% else %}
+      <img src="{% static '/images/profile-avatar.png' %}" style="height: 100px; width: auto">
+  {% endif %}
+  
+  <h3 id="h1-profile-card">
+  {% if profile.first_name or profile.last_name %}
+    {{ profile.first_name }} {{ profile.last_name }}
+  {% else %}
+    {{ profile.username }}
+  {% endif %}
+  </h3>
+  <p class="profile-title" alt="about me">{{ profile.bio_content|truncatewords:8 }}</p>
+
+  <!-- <div id="id-social">
+    <a href="#" id="id-a-profile-card"><i class="fa fa-dribbble"></i></a> 
+    <a href="#" id="id-a-profile-card"><i class="fa fa-twitter"></i></a>  
+    <a href="#" id="id-a-profile-card"><i class="fa fa-linkedin"></i></a>  
+    <a href="#" id="id-a-profile-card"><i class="fa fa-facebook"></i></a> 
+  </div> -->
+  <p id="contact"><a href="mailto:{{ profile.email }}" title="Send me an email" class="contact">Contact</a></p>
+</div>
+
+

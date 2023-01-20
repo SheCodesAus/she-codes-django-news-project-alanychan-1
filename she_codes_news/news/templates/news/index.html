@@ -1,21 +1,39 @@
-    <h2>Latest News</h2>
+{% extends "base.html" %}
+{% load static %}
 
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- <div>
+    <div class="write-story-class"><a href="{% url 'news:allStories' %}" id="write-story-id">View All Stories</a></div>
+            
+    <div class="write-story-class"><a href="{% url 'news:newStory' %}" id="write-story-id">Write New Story</a></div>
+</div> -->
+    <h2>Latest Stories</h2>
     <div id="latest-stories">
         {% if latest_stories %}
             {% for story in latest_stories %}
-                <p>{{ story.title }}</p>
+                <!--<p>{{ story.title }}</p> -->
+                {% include "./storyCard.html" with story=story position=forloop.counter %}
+            {% endfor %}
+        {% else %}
+            <p>No stories are available.</p>
+        {% endif %}
+    </div>
+    
+    <h3>Oldest Stories</h3>
+    <div id="old-stories">
+        {% if old_stories %}
+            {% for story in old_stories %}
+                <!-- <p>{{ story.title }}</p> -->
+                {% include "./storyCard.html" with story=story %}
             {% endfor %}
         {% else %}
             <p>No stories are available.</p>
         {% endif %}
     </div>
 
-    <div id="all-stories">
-        {% if latest_stories %}
-            {% for story in all_stories %}
-                <p>{{ story.title }}</p>
-            {% endfor %}
-        {% else %}
-            <p>No stories are available.</p>
-        {% endif %}
-    </div>
+{% endblock %}

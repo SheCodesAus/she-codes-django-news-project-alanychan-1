@@ -1,0 +1,29 @@
+{% load static %}
+<div>
+    <div id="menu-outer">
+        <div id="table">
+          <ul id="horizontal-list">
+            <li>
+              <a href="{% url 'news:allStories' %}">
+                View All Stories
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'news:newStory' %}">
+                Write your Story
+              </a>
+            </li> 
+            {% if request.user.is_authenticated and profile.id == request.user.id %}
+              {% if request.user.is_superuser %}
+                <li>
+                  <a href="{% url 'admin:index' %}">Admin Access</a>
+                </li>
+              {% endif %}
+              <li>
+                <a href="{% url 'users:updateAccount' request.user.id %}">Edit Profile</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>

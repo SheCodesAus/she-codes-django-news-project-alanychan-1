@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 
 <html lang="en">
@@ -6,20 +8,29 @@
         <title>She Codes News</title>
         <meta name="description" content="">
         <meta name="author" content="Hayley van Waas">
-        <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="">
+        <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
+            {% block stylesheets %}{% endblock %}
     </head>
 
     <body>
         <header>
+            <div><a href="https://github.com/SheCodesAus/she-codes-django-news-project-alanychan-1" target="_blank">Repo Link</a></div>
             <div id="header-text">
                 <a id="header-link" href="{% url 'news:index' %}">
                     <h1>She {Codes} News</h1>
                 </a>
             </div>
+            
             <!-- include nav here -->
+            {% include './nav.html' %}
         </header>
-
+        <!-- include header.html here -->
+        <div id="header-menu">
+            {% include './header.html' %}
+        </div>    
         <!-- content blocks here -->
+        {% block content %}{% endblock %}
     </body>
 </html>
